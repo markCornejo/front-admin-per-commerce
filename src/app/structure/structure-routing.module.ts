@@ -1,13 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StructureComponent } from './structure.component';
+import { HeaderComponent } from './header/header.component';
 
 
 const routes: Routes =
 [
-  { path: '', redirectTo: 'structure', pathMatch: 'full'},
+  { path: '', redirectTo: 'admin', pathMatch: 'full'},
   // { path: 'estructura', component: EstructuraComponent}
-  { path: 'structure', component: StructureComponent,}
+  { path: ':site_id', component: StructureComponent,
+    children: [
+      {path: 'home', loadChildren: () => import('../home/home.module').then(m => m.HomeModule)},
+    ]
+  },
+  { path: 'header', component: HeaderComponent}
 ];
 // const routes: Routes = [];
 

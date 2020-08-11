@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
 
   constructor() {
     // const dato = localStorage.getItem('sessionlogin');
-    // console.log(dato);
+    // console.log(JSON.parse(dato).token);
   }
 
   ngOnInit() {

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LoginService } from './login.service';
+import { LoginService } from '../services/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -76,9 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
    * @memberof LoginComponent
    */
   private responseDataSuccess(data: any) {
-
-    this.loginService.setStorateLogin(data); // crear localstorage
-
+    localStorage.setItem('sessionlogin', JSON.stringify(data)); // crear localstorage
   }
 
 }

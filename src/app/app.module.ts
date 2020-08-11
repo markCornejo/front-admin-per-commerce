@@ -14,7 +14,7 @@ import { appReducers } from './app.reducer';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
