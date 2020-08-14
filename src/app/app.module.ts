@@ -11,10 +11,12 @@ import { environment } from '../environments/environment.prod';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducers } from './app.reducer';
+import { UploadImageComponent } from './components/upload-image/upload-image.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    UploadImageComponent,
   ],
   imports: [
     BrowserModule,

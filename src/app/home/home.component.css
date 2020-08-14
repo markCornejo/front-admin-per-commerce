@@ -1,0 +1,8 @@
+.linkref {
+    cursor: pointer;
+    color: #289cff;
+}
+
+.linkref:hover {
+    color: blue;
+}

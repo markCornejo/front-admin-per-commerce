@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SiteService } from '../services/site.service';
 
 @Component({
   selector: 'app-structure',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StructureComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private siteService: SiteService,
+  ) { }
 
   ngOnInit(): void {
+
   }
 
 }

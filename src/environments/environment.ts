@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  apiPerAuth: 'http://localhost:8501/api/v1',
+  apiGateWay: 'http://localhost:8501/api/v1',
 };
 
 /*

@@ -6,7 +6,7 @@ import { ResponseLoginPeruCommerce } from '../interfaces/login.interfaces';
 import { map, catchError } from 'rxjs/operators';
 import { of, throwError } from 'rxjs';
 
-const apiAuth = environment.apiPerAuth;
+const apiGateWay = environment.apiGateWay;
 
 const headersToken = new HttpHeaders({
   'Content-Type': 'application/json',
@@ -23,11 +23,11 @@ export class LoginService {
   ) { }
 
   login(siteId: number, params) {
-    return this.http.post<ResponseLoginPeruCommerce>(`${apiAuth}/es/sites/${siteId}/users/login`, params);
+    return this.http.post<ResponseLoginPeruCommerce>(`${apiGateWay}/es/sites/${siteId}/users/login`, params);
   }
 
   checkToken() {
-    return this.http.post<boolean>(`${apiAuth}/es/login/check`, [], {headers: headersToken})
+    return this.http.post<boolean>(`${apiGateWay}/es/login/check`, [], {headers: headersToken})
     .pipe(
       map( resp => {
         return resp;
