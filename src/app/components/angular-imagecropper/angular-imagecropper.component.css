@@ -1,0 +1,4 @@
+.overlay-cropper {
+    --cropper-outline-color: rgba(255, 255, 255, 0.6);
+    --cropper-overlay-color: rgba(255, 255, 255);
+}

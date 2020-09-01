@@ -10,7 +10,7 @@ const routes: Routes =
   // { path: 'estructura', component: EstructuraComponent}
   { path: ':site_id', component: StructureComponent,
     children: [
-      {path: 'home', loadChildren: () => import('../home/home.module').then(m => m.HomeModule)},
+      {path: 'home', loadChildren: () => import('../modules/home/home.module').then(m => m.HomeModule)},
     ]
   },
   { path: 'header', component: HeaderComponent}

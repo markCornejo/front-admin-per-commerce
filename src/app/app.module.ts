@@ -7,16 +7,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../environments/environment.prod';
 
-//Ngrx
+// Ngrx
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducers } from './app.reducer';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 
+// import { NgbModule, NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+// componentes personalizados
+import { CustomcomponentsModule } from './components/customcomponents.module';
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    UploadImageComponent,
+    UploadImageComponent
   ],
   imports: [
     BrowserModule,
@@ -28,8 +35,17 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
+    NgbModule,
+    CustomcomponentsModule
   ],
-  providers: [],
+  providers: [
+    /*
+    {
+      provide: DROPZONE_CONFIG,
+      useValue: DEFAULT_DROPZONE_CONFIG,
+    },
+    */
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

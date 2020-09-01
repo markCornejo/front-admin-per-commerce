@@ -1,0 +1,106 @@
+<!-- DropZone.js establico con modal de https://ng-bootstrap.github.io/ -->
+<div>
+    <div [hidden]="loadermain" class="loadermodal text-center">
+        <i class="far fa-grin-beam-sweat fa-10x fa-pulse text-primary" style="margin-top: 30%;"></i>
+        <div>Loading ...</div>
+    </div>
+    <div class="modal-header">
+        <div class="mr-2" [hidden]="cropimage">
+            <button class="btn btn-info" (click)="back()">
+              Regresar
+            </button>
+        </div>
+        <h2 class="modal-title mb-0" id="modal-basic-title">
+            <span [hidden]="!cropimage">
+              Galeria de imagenes
+            </span>
+            <span [hidden]="cropimage">
+              Recortar imagen
+            </span>
+        </h2>
+        <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="mb-5" *ngIf="cropimage">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+                <li [ngbNavItem]="1">
+                    <a ngbNavLink>Principal</a>
+                    <ng-template ngbNavContent>
+
+                        <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">
+                            <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
+                                <dropzone class="dropzone-container" [config]="config" [message]="'Haga clic o arrastre las imágenes aquí para cargar'" (error)="onUploadError($event)" (success)="onUploadSuccess($event)" (init)="onInitImage($event)" (removedFile)="onRemovedFile($event)"
+                                    (addedFile)="onAddedFile($event)" (complete)="onComplete($event)" fxLayout="row" fxLayoutAlign="start strech" fxFlex="auto"></dropzone>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <!-- dropzona -->
+                            </div>
+                            <div id="images-list-dropzone" class="images-list-dropzone card-columns">
+
+                                <div id="preview-template" style="display: none;">
+                                    <div class="dz-preview dz-file-preview cus-preview card text-center mb-4" style="margin: unset;">
+
+                                        <div class="text-thumbnail-preview">
+                                            <div class="text-right">
+                                                <button id="btn-edit-image-dropzone" type="button" class="btn btn-warning btn-width-40 disabled"><i class="fas fa-edit"></i></button>
+                                                <button id="btn-view-image-dropzone" type="button" class="btn btn-info btn-width-40 ml-1 disabled"><i class="fas fa-download"></i></button>
+                                                <button id="btn-trash-image-dropzone" type="button" class="btn btn-danger btn-width-40 ml-1" data-dz-remove><i class="fas fa-trash-alt"></i></button>
+                                            </div>
+                                            <div class="img-dropzone-loading text-center" style="width: 250px;">
+                                                <i class="m-2 fas fa-spinner fa-3x fa-pulse"></i>
+                                            </div>
+                                            <div class="img-thumbnail-preview d-none">
+                                                <img data-dz-thumbnail class="img-thumbnail" style="width: 250px;" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="progress dz-progress d-none div-td">
+                                                <div class="progress-bar dz-upload" data-dz-uploadprogress role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                                    <div class="dz-success-mark d-none"><span>✔ Success </span></div>
+                                                    <div class="dz-error-mark d-none"><span>✘ Error</span></div>
+                                                </div>
+                                            </div>
+                                            <div class="dz-progress div-td">
+                                                <span class="dz-upload" data-dz-uploadprogress></span>
+                                            </div>
+                                            <div class="dz-error-message"><span data-dz-errormessage class="text-danger"></span></div>
+                                        </div>
+                                        <div>
+                                            <div class="dz-filename div-td text-center" style="font-size: 11px;"><span data-dz-name></span></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="b-vermas">
+                                    <button class="btn btn-success buttn" (click)="vermas()">Ver más</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="2">
+                    <a ngbNavLink>Productos</a>
+                    <ng-template ngbNavContent>
+                        <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
+                            cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
+                            shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+                    </ng-template>
+                </li>
+            </ul>
+
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        </div>
+
+        <div *ngIf="!cropimage">
+            <app-angular-imagecropper [inputCropped]="inputCropped"></app-angular-imagecropper>
+        </div>
+
+    </div>
+</div>

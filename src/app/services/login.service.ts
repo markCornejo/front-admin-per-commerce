@@ -10,7 +10,8 @@ const apiGateWay = environment.apiGateWay;
 
 const headersToken = new HttpHeaders({
   'Content-Type': 'application/json',
-  Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('sessionlogin')).token,
+  // tslint:disable-next-line: max-line-length
+  Authorization: 'Bearer ' + (JSON.parse(localStorage.getItem('sessionlogin')) ? JSON.parse(localStorage.getItem('sessionlogin')).token : ''),
 });
 
 @Injectable({

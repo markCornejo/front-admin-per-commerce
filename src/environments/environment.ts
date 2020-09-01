@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-
   apiGateWay: 'http://localhost:8501/api/v1',
 };
 

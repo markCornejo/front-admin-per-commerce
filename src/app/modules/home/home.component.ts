@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SiteService } from '../services/site.service';
+import { SiteService } from '../../services/site.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { DropzoneComponent } from '../../components/dropzone/dropzone.component';
 
 @Component({
   selector: 'app-home',
@@ -12,12 +14,14 @@ export class HomeComponent implements OnInit {
 
   profileForm: FormGroup;
   changeDomain: number;
+  closeResult = '';
 
   constructor(
     private siteService: SiteService,
     private router: Router,
     private route: ActivatedRoute,
     private formBuild: FormBuilder,
+    private ngbModel: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +61,36 @@ export class HomeComponent implements OnInit {
 
   changeDom() {
     this.changeDomain = (this.changeDomain) ? 0 : 1;
+  }
+
+  openDialog() {
+    const modald = this.ngbModel.open(DropzoneComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'xl',
+      windowClass: 'dropzone-homemodal'
+    });
+
+    modald.componentInstance.siteId = 1;
+    modald.componentInstance.lang = 'es';
+
+    modald.result.then((result) => {
+      console.log(result);
+      // this.src = result.dataURL;
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      console.log(reason);
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
 }

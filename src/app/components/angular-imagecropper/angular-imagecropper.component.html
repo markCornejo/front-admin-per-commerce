@@ -1,0 +1,20 @@
+<div>
+    <div>
+        <image-cropper class="overlay-cropper" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false" [aspectRatio]="aspectRatio" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"
+            [resizeToWidth]="resizeToWidth" [cropperStaticWidth]="cropperStaticWidth" [cropperMinWidth]="cropperMinWidth" [hideResizeSquares]="hideResizeSquares">
+        </image-cropper>
+    </div>
+    <div class="text-center mt-4">
+        <div>
+            Previsualización
+        </div>
+        <div>
+            <img [src]="croppedImage" />
+        </div>
+    </div>
+    <div class="text-center mt-2">
+        <button class="btn btn-success">
+        Guardar
+      </button>
+    </div>
+</div>
