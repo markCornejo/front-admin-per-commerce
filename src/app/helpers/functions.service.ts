@@ -29,4 +29,21 @@ export class FunctionsService {
     return str.replace(/\s/g, '').toLowerCase();
   }
 
+
+  convertImageTobase64(img: any) {
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    const dataURL = canvas.toDataURL('image/png');
+    return dataURL.replace(/^data:image\/(png|jpg|jpeg);base64,/, '');
+  }
+
+  // eliminat tildes
+  removeAccents(text: string) {
+    return text.normalize('NFD').replace(/[\u0300-\u036f]/g,"");
+  }
+
+
 }

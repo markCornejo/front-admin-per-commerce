@@ -19,7 +19,6 @@
                 -->
                 <!-- /.col -->
             </div>
-            <button mat-button (click)="openDialog()">Launch dialog</button>
             <div class="row">
                 <div class="col-12">
                     <div class="card card-primary card-tabs">
@@ -54,36 +53,59 @@
                                                     <input type="text" class="form-control" formControlName="email" placeholder="Email del lugar ...">
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-sm-12 col-md-4">
-                                                <div class="form-group">
-                                                    <label>
-                                                      <span [ngStyle]="{'text-decoration': changeDomain ? 'underline' : 'none'}" class="linkref" (click)="changeDom()" >Dominio</span> /
-                                                       <span [ngStyle]="{'text-decoration': !changeDomain ? 'underline' : 'none'}" class="linkref" (click)="changeDom()">Subdominio</span> </label>
-                                                    <div class="input-group mb-3">
-                                                        <input [hidden]="!changeDomain" type="text" class="form-control" formControlName="domain" placeholder="e.g. mipagina.com">
-                                                        <input [hidden]="changeDomain" type="text" class="form-control" formControlName="subdomain" placeholder="e.g. mipagina">
-                                                        <div class="input-group-append" *ngIf="changeDomain == 0">
-                                                            <span class="input-group-text" id="">.perucommerce.com</span>
+                                            <div class="col-12 col-sm-12 col-md-12">
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-12 col-md-4">
+                                                        <div class="form-group">
+                                                            <label>
+                                                            <span [ngStyle]="{'text-decoration': changeDomain ? 'underline' : 'none'}" class="linkref" (click)="changeDom()" >Dominio</span> /
+                                                             <span [ngStyle]="{'text-decoration': !changeDomain ? 'underline' : 'none'}" class="linkref" (click)="changeDom()">Subdominio</span> </label>
+                                                            <div class="input-group mb-3">
+                                                                <input [hidden]="!changeDomain" type="text" class="form-control" formControlName="domain" placeholder="e.g. mipagina.com">
+                                                                <input [hidden]="changeDomain" type="text" class="form-control" formControlName="subdomain" placeholder="e.g. mipagina">
+                                                                <div class="input-group-append" *ngIf="changeDomain == 0">
+                                                                    <span class="input-group-text" id="">.perucommerce.com</span>
+                                                                </div>
+                                                                <div class="input-group-append">
+                                                                    <button type="button" class="btn btn-warning" (click)="changeDom()">
+                                                                    <span *ngIf="changeDomain == 0">Subdominio</span>
+                                                                    <span *ngIf="changeDomain == 1">Dominio</span>
+                                                                  </button>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="input-group-append">
-                                                            <button type="button" class="btn btn-warning" (click)="changeDom()">
-                                                              <span *ngIf="changeDomain == 0">Subdominio</span>
-                                                              <span *ngIf="changeDomain == 1">Dominio</span>
-                                                            </button>
-                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Logo</label>
-                                                    <img src="" alt="logo">
+                                                    <div class="info-box">
+                                                        <span class="info-box-icon btn-primary elevation-1 mr-2">
+                                                          Logo
+                                                        </span>
+                                                        <img [src]="srclogo" alt="logo" width="200">
+                                                    </div>
+                                                    <input type="text" class="form-control" formControlName="logo">
+                                                    <button type="button" class="btn btn-primary" (click)="openDialogGallery('logo')">
+                                                      Agregar logo
+                                                    </button>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                                                 <div class="form-group">
                                                     <label>Favicon</label>
-                                                    <img src="" alt="favicon">
+                                                    <div class="info-box">
+                                                        <span class="info-box-icon btn-primary elevation-1 mr-2 w-109">
+                                                          favicon
+                                                        </span>
+                                                        <img [src]="srcfavicon" alt="favicon" width="200">
+                                                    </div>
+                                                    <input type="text" class="form-control" formControlName="favicon">
+                                                    <button type="button" class="btn btn-primary" (click)="openDialogGallery('favicon')">
+                                                      Agregar favicon
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,17 +114,20 @@
                                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                                             <div>
                                                 mapa
+                                                <input type="text" class="form-control">
                                             </div>
                                             <div>
                                                 direccion
+                                                <input type="text" class="form-control">
                                             </div>
                                             <div>
                                                 telefono
+                                                <input type="text" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                                            <button type="button" class="btn btn-block btn-primary btn-lg">
-                                              Agregar más lugares y telefono
+                                            <button type="button" class="btn btn-info" (click)="openDialogLocation()">
+                                              Editar lugares y telefono
                                             </button>
                                         </div>
                                     </div>

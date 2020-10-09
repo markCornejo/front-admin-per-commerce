@@ -1,0 +1,32 @@
+<div>
+    <div class="modal-header">
+        Agregar telefono, direccion y mapa
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <app-home-phone></app-home-phone>
+                <app-home-address [selecteds]="selecteds" (dataSelecteds)="dataSelecteds($event)"></app-home-address>
+                <div class="form-group">
+                    <label>Dirección *</label>
+                    <input type="text" class="form-control" placeholder="Direccion">
+                </div>
+            </div>
+            <div id="geocoder"></div>
+            <div class="col-12">
+                <div>
+                    <div id="mapa-mapbox"></div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mt-3 text-center">
+                    <button class="btn btn-success">
+                  Guardar
+                </button>
+                </div>
+            </div>
+        </div>
+        <button (click)="prueba()" class="btn btn-success"> Prueba 123</button>
+        <button (click)="volar()" id="fly" class="btn btn-warning"> Volando </button>
+    </div>
+</div>

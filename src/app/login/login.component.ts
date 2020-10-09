@@ -35,7 +35,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
 
     // tslint:disable-next-line: no-shadowed-variable
-    this.loginSubscription = this.store.select('ui').subscribe( ui => {this.cargando = ui.isLoading; /*console.log('cargandoo');*/ } );
+    this.loginSubscription = this.store.select('ui').subscribe( ui => {
+      console.log(ui.isLoading);
+      this.cargando = ui.isLoading; /*console.log('cargandoo');*/
+    } );
   }
 
   ngOnDestroy() {
@@ -44,7 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login() {
 
-    this.cargando = true;
+    // this.cargando = true;
     const siteId = 2;
     const params = this.loginForm.value;
 
@@ -60,10 +63,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.responseDataSuccess(data);
         this.router.navigate(['/mstructure/structure']);
       }
+
     }, error => {
       console.log(error);
       this.store.dispatch( ui.stopLoading());
-      this.cargando = false;
+      // this.cargando = false;
     });
 
   }

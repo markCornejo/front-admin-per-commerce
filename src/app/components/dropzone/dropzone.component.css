@@ -73,6 +73,8 @@
 .images-list-dropzone .b-vermas {
     position: absolute;
     bottom: -50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .images-list-dropzone .b-vermas .buttn {
@@ -89,10 +91,20 @@
 
 .dz-preview .text-thumbnail-preview .img-thumbnail-preview {
     cursor: pointer;
+    position: relative;
 }
 
 .dz-preview .text-thumbnail-preview .img-thumbnail-preview .img-thumbnail:hover {
     background-color: cornflowerblue;
+}
+
+.dz-preview .text-thumbnail-preview .img-thumbnail-preview .typeimage {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 0px 2px 0px 2px;
 }
 
 .loadermodal {

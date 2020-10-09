@@ -23,14 +23,18 @@
       </button>
     </div>
     <div class="modal-body">
-
         <div class="mb-5" *ngIf="cropimage">
             <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
                 <li [ngbNavItem]="1">
                     <a ngbNavLink>Principal</a>
                     <ng-template ngbNavContent>
-
+                        <div>
+                            <h4 class="mt-4">
+                                Subir una imagen
+                            </h4>
+                        </div>
                         <div class="vertical-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="50%">
+                            <div class="text-warning text-right">* Peso máximo de la imagen 10Mb</div>
                             <div class="content-container" fxLayout="column" fxLayoutAlign="stretch" fxFlex="auto">
                                 <dropzone class="dropzone-container" [config]="config" [message]="'Haga clic o arrastre las imágenes aquí para cargar'" (error)="onUploadError($event)" (success)="onUploadSuccess($event)" (init)="onInitImage($event)" (removedFile)="onRemovedFile($event)"
                                     (addedFile)="onAddedFile($event)" (complete)="onComplete($event)" fxLayout="row" fxLayoutAlign="start strech" fxFlex="auto"></dropzone>
@@ -38,8 +42,11 @@
                         </div>
                         <div>
                             <div>
-                                <!-- dropzona -->
+                                <h4 class="mb-4">
+                                    Seleccione una imagen
+                                </h4>
                             </div>
+                            <!-- dropzona -->
                             <div id="images-list-dropzone" class="images-list-dropzone card-columns">
 
                                 <div id="preview-template" style="display: none;">
@@ -55,6 +62,7 @@
                                                 <i class="m-2 fas fa-spinner fa-3x fa-pulse"></i>
                                             </div>
                                             <div class="img-thumbnail-preview d-none">
+                                                <div class="typeimage d-none"></div>
                                                 <img data-dz-thumbnail class="img-thumbnail" style="width: 250px;" />
                                             </div>
                                         </div>
@@ -77,8 +85,9 @@
 
                                 </div>
 
-                                <div class="b-vermas">
-                                    <button class="btn btn-success buttn" (click)="vermas()">Ver más</button>
+                                <div class="b-vermas" [hidden]="!buttonvermas">
+                                    <button class="btn btn-success buttn" (click)="vermas()" [hidden]="!buttonvermasloader">Ver más</button>
+                                    <button class="btn btn-success buttn" [hidden]="buttonvermasloader"><i class="fas fa-spinner fa-pulse"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -99,7 +108,7 @@
         </div>
 
         <div *ngIf="!cropimage">
-            <app-angular-imagecropper [inputCropped]="inputCropped"></app-angular-imagecropper>
+            <app-angular-imagecropper [cropUrlImage]="cropUrlImage" [inputCropped]="inputCropped" [siteId]="siteId" [imageId]="imageId"></app-angular-imagecropper>
         </div>
 
     </div>

@@ -1,0 +1,28 @@
+<div class="form-group">
+    <label>
+      Pais *
+    </label>
+    <ng-select class="custom" [items]="countries" [clearable]="false" bindValue="id" bindLabel="name" [(ngModel)]="selecteds.countries.id" (change)="establishStates($event)" [searchable]="false" placeholder="Seleccionar pais">
+    </ng-select>
+</div>
+<div class="form-group">
+    <label>
+      Estado / Departamento *
+    </label>
+    <ng-select class="custom" [items]="states" [clearable]="false" bindValue="id" bindLabel="name" [(ngModel)]="selecteds.states.id" (change)="establishCities($event)" [searchable]="false" placeholder="Seleccionar">
+    </ng-select>
+</div>
+<div class="form-group">
+    <label>
+    Ciudad
+  </label>
+    <ng-select class="custom" [items]="cities" [clearable]="false" bindValue="id" bindLabel="name" [(ngModel)]="selecteds.cities.id" (change)="establishDistrics($event)" [searchable]="false" placeholder="Seleccionar">
+    </ng-select>
+</div>
+<div class="form-group">
+    <label>
+      Distrito
+    </label>
+    <ng-select class="custom" [items]="districs" [clearable]="false" bindValue="id" bindLabel="name" [(ngModel)]="selecteds.districs.id" (change)="establishFinist($event)" [searchable]="false" placeholder="Seleccionar">
+    </ng-select>
+</div>

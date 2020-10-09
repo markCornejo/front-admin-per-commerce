@@ -1,7 +1,11 @@
 <div>
+    <div [hidden]="loadermain" class="loadermodal text-center">
+        <i class="far fa-grin-beam-sweat fa-10x fa-pulse text-success" style="margin-top: 30%;"></i>
+        <div>Loading ...</div>
+    </div>
     <div>
-        <image-cropper class="overlay-cropper" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false" [aspectRatio]="aspectRatio" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"
-            [resizeToWidth]="resizeToWidth" [cropperStaticWidth]="cropperStaticWidth" [cropperMinWidth]="cropperMinWidth" [hideResizeSquares]="hideResizeSquares">
+        <image-cropper class="overlay-cropper" [imageURL]="imageURL" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false" [aspectRatio]="aspectRatio" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()" [resizeToWidth]="resizeToWidth" [cropperStaticWidth]="cropperStaticWidth" [cropperMinWidth]="cropperMinWidth" [hideResizeSquares]="hideResizeSquares" [onlyScaleDown]="onlyScaleDown">
         </image-cropper>
     </div>
     <div class="text-center mt-4">
@@ -13,8 +17,11 @@
         </div>
     </div>
     <div class="text-center mt-2">
-        <button class="btn btn-success">
-        Guardar
-      </button>
+        <button class="m-3 btn btn-success" (click)="saveAlso()">
+          <i class="fas fa-save"></i> Sólo guardar
+        </button>
+        <button class="m-3 btn btn-info" (click)="saveChoose()">
+          Guardar y seleccionar
+        </button>
     </div>
 </div>

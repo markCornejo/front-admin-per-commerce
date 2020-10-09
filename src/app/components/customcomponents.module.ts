@@ -12,6 +12,14 @@ import { DropzoneComponent } from './dropzone/dropzone.component';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { ModalLocationComponent } from './modal-location/modal-location.component';
+import { HomeAddressComponent } from './home-address/home-address.component';
+import { HomePhoneComponent } from './home-phone/home-phone.component';
+
+// NgSelect  Forms
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+
 
 export const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -20,18 +28,23 @@ export const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   maxFilesize: 50,
   acceptedFiles: 'image/*',
   createImageThumbnails: true,
-  headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('sessionlogin')).token }
+  headers: { Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('sessionlogin'))?.token }
 };
 
 @NgModule({
   declarations: [
     AngularImagecropperComponent,
-    DropzoneComponent
+    DropzoneComponent,
+    ModalLocationComponent,
+    HomeAddressComponent,
+    HomePhoneComponent
   ],
   imports: [
     CommonModule,
     ImageCropperModule,
     DropzoneModule,
+    NgSelectModule,
+    FormsModule,
     NgbModule
   ],
   exports: [
