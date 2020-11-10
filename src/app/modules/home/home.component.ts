@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
 
       this.site = resp.site;
       if(this.site) {
-        this.profileForm?.patchValue(this.site);
+        this.profileForm?.patchValue(this.site); //  agregar todos los valores
 
         if (this.profileForm?.controls.domain.value){
           this.changeDomain = 1;
@@ -116,12 +116,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openDialogLocation() {
+  openDialogLocation(type: string) {
     const modald = this.ngbModel.open(ModalLocationComponent, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'lg',
       // windowClass: 'dropzone-homemodal'
     });
+
+    modald.componentInstance.type = type; // locacion new o edit;
+    modald.componentInstance.lang = lang;
 
     modald.result.then((result) => {
       // tslint:disable-next-line: no-string-literal

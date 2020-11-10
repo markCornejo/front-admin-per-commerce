@@ -20,6 +20,8 @@ import { HomePhoneComponent } from './home-phone/home-phone.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 
+// Helper
+import { OnlynumberDirective } from '../helpers/onlynumber.directive';
 
 export const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   // Change this to your upload POST address:
@@ -37,7 +39,8 @@ export const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     DropzoneComponent,
     ModalLocationComponent,
     HomeAddressComponent,
-    HomePhoneComponent
+    HomePhoneComponent,
+    OnlynumberDirective
   ],
   imports: [
     CommonModule,

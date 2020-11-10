@@ -16,6 +16,9 @@ const mapboxKey = environment.mapboxKey;
 export class MapboxService {
 
   mapa: Mapboxgl.Map;
+  lng: number = -74.5;
+  lat: number = 40;
+  currentMarkers = [];
 
   constructor(
     private http: HttpClient,
@@ -27,38 +30,60 @@ export class MapboxService {
     this.mapa = new Mapboxgl.Map({
                 container: 'mapa-mapbox', // container id
                 style: 'mapbox://styles/mapbox/streets-v11',
-                center: [-74.5, 40], // LNG, LAT
-                zoom: 9 // starting zoom
+                center: [this.lng, this.lat], // LNG, LAT
+                zoom: 12 // starting zoom
               });
-
-    this.clearMarker(-74.5, 40);
-
   }
 
-  clearMarker(lng: number, lat: number) {
+  // cuando usa el buscador de lugares de mapbox
+  addGeocoderFindLocation() {
+    const geocoder = new MapboxGeocoder({
+      accessToken: Mapboxgl.accessToken,
+      // types: 'Peru, Lima', // 'country,region,place,postcode,locality,neighborhood',
+      marker: false,
+      mapboxgl: Mapboxgl,
+    });
+
+    geocoder.on('result', (e) => {
+      this.deleteMarkerBeforeLocation();
+      this.clearMarkerLocation(e.result.center[0], e.result.center[1]);
+      // map.getSource('single-point').setData(e.result.geometry);
+    });
+
+    this.mapa.addControl(geocoder);
+  }
+
+  // agregar marcador de locacion
+  clearMarkerLocation(lng: number, lat: number) {
     const marker = new Mapboxgl.Marker({
       draggable: true
       })
       .setLngLat([lng, lat])
       .addTo(this.mapa);
 
-    const geocoder = new MapboxGeocoder({
-      accessToken: Mapboxgl.accessToken,
-      // types: 'Peru, Lima', // 'country,region,place,postcode,locality,neighborhood',
-      mapboxgl: Mapboxgl,
-    });
-
-    document.getElementById('geocoder').appendChild(geocoder.onAdd(this.mapa));
-
+    this.currentMarkers.push(marker);
+    this.lng = lng;
+    this.lat = lat;
+    // document.getElementById('geocoder').appendChild(geocoder.onAdd(this.mapa));
     marker.on('drag', () => {
-      // console.log(marker.getLngLat());
+      const lngLat = marker.getLngLat();
+      this.lng = lngLat.lng;
+      this.lat = lngLat.lat;
     });
+  }
 
-    //
-    document.getElementById('fly').addEventListener('click', () => {
+  // borrar todos los marcadores de locacion
+  deleteMarkerBeforeLocation() {
+    if (this.currentMarkers.length > 0) {
+      for (let i = this.currentMarkers.length - 1; i >= 0; i--) {
+        this.currentMarkers[i].remove();
+      }
+    }
+  }
 
-    });
-
+  // obtener marker de locacion
+  currentMarkerLocation() {
+    return [this.lng, this.lat];
   }
 
   // volar hacia el lugar que se está seleccionando
@@ -75,11 +100,13 @@ export class MapboxService {
         for (const prop in resp.features) {
           // console.log(resp.features[prop].place_name.toLowerCase(), country);
           if (resp.features[prop].place_name.toLowerCase().indexOf(country) > 0) {
+            this.deleteMarkerBeforeLocation();
             this.mapa.flyTo({
               center: resp.features[prop].center,
               zoom: 14,
               essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
+            this.clearMarkerLocation(resp.features[prop].center[0], resp.features[prop].center[1]);
             break;
           }
         }
@@ -88,6 +115,7 @@ export class MapboxService {
 
   }
 
+  // convertir lugares a coordenadas geograficas
   convertPlaceToCoor(place: string) {
 
     return this.http.get(`${apiMapBox}/mapbox.places/${place}.json?access_token=${mapboxKey}`);

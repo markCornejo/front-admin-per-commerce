@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgSelectConfig } from '@ng-select/ng-select';
 import { AppState } from '../../app.reducer';
 import { Store } from '@ngrx/store';
@@ -10,12 +10,16 @@ import { Store } from '@ngrx/store';
 })
 export class HomePhoneComponent implements OnInit {
 
+  @Input() error: any = {};
+  @Output() values: EventEmitter<any> = new EventEmitter();
+
   exampleData: any;
   countries = [];
   location: any;
   selectedCountries: any; // valor seleccionado del select pais
   site: any;  // data del sitio
   ubimain: any = {};  // ubicacion principal del sitio
+  phone: number; // numero de telefono
 
   constructor(
     private config: NgSelectConfig,
@@ -47,14 +51,16 @@ export class HomePhoneComponent implements OnInit {
           return el.main === 1;
         });
         this.selectedCountries = this.ubimain.pc_countries_id;
-
       }
-
     });
 
   }
 
-
-
+  change($event) {
+    this.values.emit({
+      phone: this.phone,
+      // codphone: this.selectedCountries
+    });
+  }
 
 }

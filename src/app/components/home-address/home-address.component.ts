@@ -15,6 +15,7 @@ export class HomeAddressComponent implements OnInit {
 
   @Input() selecteds;
   @Output() dataSelecteds: EventEmitter<FormSelectLocation> = new EventEmitter();
+
   exampleData: any;
   countries = [];
   states = [];
@@ -73,7 +74,7 @@ export class HomeAddressComponent implements OnInit {
     this.store.select('site').subscribe( resp => {
 
       this.site = resp.site;
-      if(this.site) {
+      if (this.site) {
         // console.log(this.site?.sites_locations);
         this.ubimain = this.site?.sites_locations.find((el) =>  {
           return el.main === 1;
@@ -118,6 +119,10 @@ export class HomeAddressComponent implements OnInit {
           this.selecteds.districs.name = this.districs[0]?.name;
         }
 
+        if (this.ubimain.lat && this.ubimain.lng) {
+           this.dataSelecteds.emit(this.selecteds); // emitar cambios al componente padre
+        }
+
       }
     });
 
@@ -133,7 +138,7 @@ export class HomeAddressComponent implements OnInit {
     this.selecteds.cities.name = null;
     this.selecteds.districs.id = null;
     this.selecteds.districs.name = null;
-    this.dataSelecteds.emit(this.selecteds);
+    this.dataSelecteds.emit(this.selecteds); // emitar cambios al componente padre
   }
 
   // cuanda seleccionas states
@@ -144,7 +149,7 @@ export class HomeAddressComponent implements OnInit {
     this.selecteds.cities.name = null;
     this.selecteds.districs.id = null;
     this.selecteds.districs.name = null;
-    this.dataSelecteds.emit(this.selecteds);
+    this.dataSelecteds.emit(this.selecteds); // emitar cambios al componente padre
   }
 
   // cuando seleccionas cities
@@ -153,14 +158,14 @@ export class HomeAddressComponent implements OnInit {
     this.selecteds.cities.name = $event.name;
     this.selecteds.districs.id = null;
     this.selecteds.districs.name = null;
-    this.dataSelecteds.emit(this.selecteds);
+    this.dataSelecteds.emit(this.selecteds); // emitar cambios al componente padre
   }
 
   // cuando seleccionas districs
   establishFinist($event) {
     this.selecteds.districs.name = $event.name;
     console.log(this.selecteds);
-    this.dataSelecteds.emit(this.selecteds);
+    this.dataSelecteds.emit(this.selecteds); // emitar cambios al componente padre
   }
 
 }

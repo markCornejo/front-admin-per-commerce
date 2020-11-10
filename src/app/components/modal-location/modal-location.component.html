@@ -1,32 +1,44 @@
 <div>
     <div class="modal-header">
-        Agregar telefono, direccion y mapa
+        <strong>
+          Agregar telefono, direccion y mapa
+        </strong>
     </div>
     <div class="modal-body">
         <div class="row">
             <div class="col-12">
-                <app-home-phone></app-home-phone>
+                <!-- Form phone-->
+                <app-home-phone [error]="error" (values)="valuesHomePhone($event)"></app-home-phone>
+
+                <!-- Form Selected de locacion -->
                 <app-home-address [selecteds]="selecteds" (dataSelecteds)="dataSelecteds($event)"></app-home-address>
+
+                <!-- Address -->
                 <div class="form-group">
                     <label>Dirección *</label>
-                    <input type="text" class="form-control" placeholder="Direccion">
+                    <input [(ngModel)]="data.address" type="text" class="form-control" placeholder="Direccion">
                 </div>
             </div>
-            <div id="geocoder"></div>
+
+            <!-- Mapa -->
             <div class="col-12">
+                <div>
+                    <label>Marcar la dirección en el mapa *</label>
+                </div>
                 <div>
                     <div id="mapa-mapbox"></div>
                 </div>
             </div>
+
             <div class="col-12">
                 <div class="mt-3 text-center">
-                    <button class="btn btn-success">
-                  Guardar
+                    <button (click)="save()" class="btn btn-success">
+                    Guardar
                 </button>
                 </div>
             </div>
+
         </div>
         <button (click)="prueba()" class="btn btn-success"> Prueba 123</button>
-        <button (click)="volar()" id="fly" class="btn btn-warning"> Volando </button>
     </div>
 </div>

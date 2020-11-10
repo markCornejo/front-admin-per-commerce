@@ -1,11 +1,11 @@
-<p>home-phone works!</p>
 <div>
     <label>
         Telefono
     </label>
     <div class="d-flex flex-row">
         <div>
-            <ng-select class="custom" [items]="countries" [clearable]="false" bindValue="id" bindLabel="name" [(ngModel)]="selectedCountries" [searchable]="false" [clearable]="false">
+            <!--
+            <ng-select class="custom" [items]="countries" [clearable]="false" bindValue="id" bindLabel="name" [(ngModel)]="selectedCountries" [searchable]="false" [clearable]="false" (change)="change($event)">
                 <ng-template ng-label-tmp let-item="item">
                     <img width="15" height="11" [src]="'assets/img/country/' + item.img_flag" />
                     <b>{{item.cod_phone}}</b>
@@ -15,10 +15,17 @@
                     <b>{{item.cod_phone}}</b>
                 </ng-template>
             </ng-select>
+            -->
+            <div class="invalid-feedback">
+                {{error.msgcodphone}}
+            </div>
         </div>
         <div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="telefono">
+                <input [(ngModel)]="phone" type="text" (ngModelChange)="change($event)" class="form-control" placeholder="telefono" appOnlynumber>
+                <div class="invalid-feedback">
+                    {{error.msgphone}}
+                </div>
             </div>
         </div>
     </div>

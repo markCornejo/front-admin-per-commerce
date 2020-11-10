@@ -1,5 +1,6 @@
 
 export class FormSelectLocation {
+
   forEach(obj: any, arg1: (val: any, key: any) => void) {
     throw new Error("Method not implemented.");
   }

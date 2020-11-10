@@ -29,4 +29,9 @@ export class LocationService {
     return this.http.get(`${apiGateWay}/${lang}/admin/sites/${siteId}/ubigeo${queryString}`, {headers: headersToken});
   }
 
+  // registrar la locacion de un lugar
+  createLocation(lang, siteId: number, data: any) {
+    return this.http.post(`${apiGateWay}/${lang}/admin/sites/${siteId}/locations`, data, {headers: headersToken});
+  }
+
 }
